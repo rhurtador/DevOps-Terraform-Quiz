@@ -13,8 +13,8 @@ variable "vpc_cidr_block" {
 variable "vpc_tags" {
   description = "Etiquetas para la VPC"
   type        = map(string)
-  default     = {
-    Name = "main-vpc"
+  default = {
+    Name        = "main-vpc"
     Environment = "dev"
   }
 }
@@ -34,8 +34,8 @@ variable "create_internet_gateway" {
 variable "subnet_tags" {
   description = "Etiquetas para la subnet"
   type        = map(string)
-  default     = {
-    Name = "public-subnet-1"
+  default = {
+    Name        = "public-subnet-1"
     Environment = "dev"
   }
 }
@@ -44,7 +44,7 @@ variable "subnet_tags" {
 variable "ec2_ami" {
   description = "AMI para la instancia EC2"
   type        = string
-  default     = "ami-0c02fb55956c7d316"  # Amazon Linux 2
+  default     = "ami-0c02fb55956c7d316" # Amazon Linux 2
 }
 
 variable "ec2_instance_type" {
@@ -68,8 +68,8 @@ variable "public_key_path" {
 variable "ec2_tags" {
   description = "Etiquetas para la instancia EC2"
   type        = map(string)
-  default     = {
-    Name = "demo-instance"
+  default = {
+    Name        = "demo-instance"
     Environment = "dev"
   }
 }
