@@ -120,13 +120,13 @@ variable "subnet_ids" {
 }
 
 # Variables para Security Group de EC2
-variable "security_group_name" {
+variable "ec2_security_group_name" {
   type        = string
   description = "Nombre del SG para EC2"
   default     = "ec2-sg"
 }
 
-variable "security_group_description" {
+variable "ec2_security_group_description" {
   type        = string
   description = "Descripción del SG para EC2"
   default     = "Security group para instancia EC2"

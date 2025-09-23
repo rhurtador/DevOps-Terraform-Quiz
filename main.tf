@@ -47,8 +47,8 @@ module "private_vpc" {
 # Security Group para EC2 (SSH/HTTP)
 module "ec2_sg" {
   source                       = "./modules/nsg"
-  security_group_name          = var.security_group_name
-  security_group_description   = var.security_group_description
+  security_group_name          = var.ec2_security_group_name
+  security_group_description   = var.ec2_security_group_description
   security_group_vpc_id        = module.private_vpc.vpc_id
   ingress_rules = [
     {

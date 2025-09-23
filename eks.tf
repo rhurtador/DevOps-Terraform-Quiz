@@ -1,8 +1,3 @@
-provider "aws" {
-  region  = "eu-west-1"
-  profile = "default"
-}
-
 data "aws_caller_identity" "current" {}
 
 data "aws_iam_policy_document" "eks_assume_role" {
