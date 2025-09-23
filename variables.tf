@@ -2,6 +2,7 @@
 variable "vpc_cidr_block" {
   description = "CIDR block para la VPC"
   type        = string
+  default     = "10.0.0.0/16"
 }
 
 # variable "vpc_name" {
@@ -12,6 +13,10 @@ variable "vpc_cidr_block" {
 variable "vpc_tags" {
   description = "Etiquetas para la VPC"
   type        = map(string)
+  default     = {
+    Name = "main-vpc"
+    Environment = "dev"
+  }
 }
 
 variable "create_internet_gateway" {
@@ -29,17 +34,23 @@ variable "create_internet_gateway" {
 variable "subnet_tags" {
   description = "Etiquetas para la subnet"
   type        = map(string)
+  default     = {
+    Name = "public-subnet-1"
+    Environment = "dev"
+  }
 }
 
 # EC2 Variables
 variable "ec2_ami" {
   description = "AMI para la instancia EC2"
   type        = string
+  default     = "ami-0c02fb55956c7d316"  # Amazon Linux 2
 }
 
 variable "ec2_instance_type" {
   description = "Tipo de instancia EC2"
   type        = string
+  default     = "t3.micro"
 }
 
 variable "ec2_key_name" {
@@ -57,6 +68,10 @@ variable "public_key_path" {
 variable "ec2_tags" {
   description = "Etiquetas para la instancia EC2"
   type        = map(string)
+  default     = {
+    Name = "demo-instance"
+    Environment = "dev"
+  }
 }
 
 #nsg Variables
@@ -68,6 +83,7 @@ variable "name" {
 variable "description" {
   type        = string
   description = "Description of the security group"
+  default     = "Security group for EKS"
 }
 
 variable "vpc_id" {
