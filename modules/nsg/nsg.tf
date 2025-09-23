@@ -38,24 +38,3 @@ resource "aws_security_group" "eks_security_group" {
 output "security_group_id" {
   value = aws_security_group.eks_security_group.id
 }
-
-variable "security_group_name" {
-  description = "Nombre del Security Group"
-  type        = string
-}
-
-variable "security_group_description" {
-  description = "Descripción del Security Group"
-  type        = string
-}
-
-variable "security_group_vpc_id" {
-  description = "ID de la VPC donde se creará el Security Group"
-  type        = string
-}
-
-variable "tags" {
-  description = "Etiquetas para el Security Group"
-  type        = map(string)
-  default     = {}
-}

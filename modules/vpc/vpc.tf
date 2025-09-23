@@ -25,9 +25,6 @@ resource "aws_route_table" "public" {
   }
 }
 
-output "public_route_table_id" {
-  value = aws_route_table.public.id
-}
 
 # #Asociamos una route Table 
 # resource "aws_route_table_association" "public" {
