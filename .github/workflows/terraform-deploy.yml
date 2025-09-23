@@ -1,10 +1,7 @@
-name: Terraform CI
+name: Terraform Deploy
 
 on:
-  push:
-    branches:
-      - main  # Default Branch
-  workflow_dispatch:  # Permite ejecución manual
+  workflow_dispatch:  # Solo ejecución manual
     inputs:
       environment:
         description: 'Environment to deploy'
@@ -15,6 +12,15 @@ on:
         - dev
         - staging
         - prod
+      action:
+        description: 'Terraform action to perform'
+        required: true
+        default: 'plan'
+        type: choice
+        options:
+        - plan
+        - apply
+        - destroy
 
 jobs:
   terraform:
@@ -30,9 +36,6 @@ jobs:
         with:
           terraform_version: 1.6.0
 
-      - name: Terraform Format Check
-        run: terraform fmt -check -recursive
-
       - name: Terraform Init
         run: terraform init
 
@@ -40,16 +43,17 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
+        if: github.event.inputs.action == 'plan'
         run: terraform plan -out=tfplan
-        continue-on-error: true
 
-      - name: Terraform Plan Status
-        if: always()
-        run: |
-          if [ $? -eq 0 ]; then
-            echo "✅ Terraform plan completed successfully"
-          else
-            echo "❌ Terraform plan failed"
-            exit 1
-          fi
-           
+      - name: Terraform Apply
+        if: github.event.inputs.action == 'apply'
+        run: terraform apply -auto-approve
+
+      - name: Terraform Destroy
+        if: github.event.inputs.action == 'destroy'
+        run: terraform destroy -auto-approve
+
+      - name: Show Terraform Output
+        if: always() && github.event.inputs.action == 'apply'
+        run: terraform output
