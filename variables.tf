@@ -45,13 +45,13 @@ variable "ec2_instance_type" {
 variable "ec2_key_name" {
   description = "Nombre del Key Pair a usar para la instancia EC2"
   type        = string
-  default     = "test-key-name"  # Ajusta según tu preferencia
+  default     = "test-key-name" # Ajusta según tu preferencia
 }
 
 variable "public_key_path" {
   description = "Ruta al archivo que contiene tu clave pública"
   type        = string
-  default     = "~/.ssh/id_rsa.pub"  # Ajusta según la ruta real de tu clave pública
+  default     = "~/.ssh/id_rsa.pub" # Ajusta según la ruta real de tu clave pública
 }
 
 variable "ec2_tags" {
@@ -108,7 +108,7 @@ variable "security_group_cidr_blocks" {
 variable "security_group_tags" {
   description = "Etiquetas para el grupo de seguridad"
   type        = map(string)
-  default     = {
+  default = {
     Name = "eks-private-security-group"
   }
 }
@@ -155,7 +155,7 @@ variable "security_groups" {
 variable "subnet_cidr_block" {
   description = "CIDR block para la subred"
   type        = string
-  default     = "10.0.1.0/24"  # Define el CIDR block de la subred (ajústalo según sea necesario)
+  default     = "10.0.1.0/24" # Define el CIDR block de la subred (ajústalo según sea necesario)
 }
 
 variable "subnet2_cidr_block" {
@@ -167,7 +167,7 @@ variable "subnet2_cidr_block" {
 variable "subnet2_tags" {
   description = "Etiquetas para la segunda subnet"
   type        = map(string)
-  default     = {
+  default = {
     Name = "subnet-b"
   }
 }

@@ -9,7 +9,7 @@ variable "vpc_cidr_block" {
 variable "vpc_tags" {
   description = "Etiquetas para la VPC"
   type        = map(string)
-  default     = {
+  default = {
     Name = "private-vpc"
   }
 }

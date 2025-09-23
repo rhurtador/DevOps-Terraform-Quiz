@@ -5,32 +5,32 @@ provider "aws" {
 
 # Crear la Subnet
 module "subnet" {
-  source          = "./modules/subnet"
-  vpc_id          = module.private_vpc.vpc_id
-  cidr_block      = var.subnet_cidr_block
-  subnet_tags     = var.subnet_tags
-  route_table_id  = module.private_vpc.public_route_table_id
+  source         = "./modules/subnet"
+  vpc_id         = module.private_vpc.vpc_id
+  cidr_block     = var.subnet_cidr_block
+  subnet_tags    = var.subnet_tags
+  route_table_id = module.private_vpc.public_route_table_id
 }
 
 # Segunda Subnet en otra AZ para EKS
 module "subnet_b" {
-  source          = "./modules/subnet"
-  vpc_id          = module.private_vpc.vpc_id
-  cidr_block      = var.subnet2_cidr_block
-  subnet_tags     = var.subnet2_tags
-  route_table_id  = module.private_vpc.public_route_table_id
+  source         = "./modules/subnet"
+  vpc_id         = module.private_vpc.vpc_id
+  cidr_block     = var.subnet2_cidr_block
+  subnet_tags    = var.subnet2_tags
+  route_table_id = module.private_vpc.public_route_table_id
 }
 
 # Crear la EC2
 module "ec2_instance" {
-  source          = "./modules/ec2"
-  ami_id          = var.ec2_ami
-  instance_type   = var.ec2_instance_type
-  ec2_key_name    = var.ec2_key_name
-  subnet_id       = module.subnet.subnet_id
-  public_key_path = var.public_key_path
+  source             = "./modules/ec2"
+  ami_id             = var.ec2_ami
+  instance_type      = var.ec2_instance_type
+  ec2_key_name       = var.ec2_key_name
+  subnet_id          = module.subnet.subnet_id
+  public_key_path    = var.public_key_path
   security_group_ids = [module.ec2_sg.security_group_id]
-  ec2_tags= var.ec2_tags
+  ec2_tags           = var.ec2_tags
   # ec2_tags = {
   #   Name = var.ec2_name
   # }
@@ -46,10 +46,10 @@ module "private_vpc" {
 
 # Security Group para EC2 (SSH/HTTP)
 module "ec2_sg" {
-  source                       = "./modules/nsg"
-  security_group_name          = var.ec2_security_group_name
-  security_group_description   = var.ec2_security_group_description
-  security_group_vpc_id        = module.private_vpc.vpc_id
+  source                     = "./modules/nsg"
+  security_group_name        = var.ec2_security_group_name
+  security_group_description = var.ec2_security_group_description
+  security_group_vpc_id      = module.private_vpc.vpc_id
   ingress_rules = [
     {
       from_port   = 22
