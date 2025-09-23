@@ -1,8 +1,3 @@
-provider "aws" {
-  region = "eu-west-1"
-}
-
-
 # Crear la Subnet
 module "subnet" {
   source         = "./modules/subnet"
@@ -31,9 +26,6 @@ module "ec2_instance" {
   public_key_path    = var.public_key_path
   security_group_ids = [module.ec2_sg.security_group_id]
   ec2_tags           = var.ec2_tags
-  # ec2_tags = {
-  #   Name = var.ec2_name
-  # }
 }
 
 

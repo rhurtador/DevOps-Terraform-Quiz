@@ -78,6 +78,7 @@ variable "ec2_tags" {
 variable "name" {
   type        = string
   description = "The name of the security group"
+  default     = "eks-security-group"
 }
 
 variable "description" {
@@ -89,6 +90,7 @@ variable "description" {
 variable "vpc_id" {
   type        = string
   description = "The VPC ID where the security group will be created"
+  default     = ""
 }
 
 variable "cidr_blocks" {
@@ -133,6 +135,7 @@ variable "security_group_tags" {
 variable "subnet_ids" {
   description = "IDs de las subnets donde se desplegará el Load Balancer"
   type        = list(string)
+  default     = []
 }
 
 # Variables para Security Group de EC2
@@ -151,21 +154,28 @@ variable "ec2_security_group_description" {
 variable "lb_tags" {
   description = "Etiquetas para el Load Balancer"
   type        = map(string)
+  default = {
+    Name        = "demo-loadbalancer"
+    Environment = "dev"
+  }
 }
 
 variable "load_balancer_name" {
   description = "Nombre del Load Balancer"
   type        = string
+  default     = "demo-lb"
 }
 
 variable "internal" {
   description = "Si el Load Balancer es interno o no"
   type        = bool
+  default     = false
 }
 
 variable "security_groups" {
   description = "IDs de los Security Groups asociados al Load Balancer"
   type        = list(string)
+  default     = []
 }
 
 variable "subnet_cidr_block" {
@@ -191,5 +201,6 @@ variable "subnet2_tags" {
 variable "security_group_vpc_id" {
   description = "ID de la VPC para el grupo de seguridad"
   type        = string
+  default     = ""
 }
 
