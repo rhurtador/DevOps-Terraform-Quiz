@@ -1,12 +1,12 @@
 name: Terraform CI
 
-   on:
-     push:
-       branches:
-         - main  # Default Branch
+on:
+  push:
+    branches:
+      - main  # Default Branch
 
-   jobs:
-     terraform:
+jobs:
+  terraform:
        runs-on: ubuntu-latest
        steps:
          - name: Checkout code
