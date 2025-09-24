@@ -1,20 +1,20 @@
 # Primera Subnet en AZ1
 module "subnet" {
-  source         = "./modules/subnet"
-  vpc_id         = module.private_vpc.vpc_id
-  cidr_block     = var.subnet_cidr_block
-  subnet_tags    = var.subnet_tags
-  route_table_id = module.private_vpc.public_route_table_id
+  source            = "./modules/subnet"
+  vpc_id            = module.private_vpc.vpc_id
+  cidr_block        = var.subnet_cidr_block
+  subnet_tags       = var.subnet_tags
+  route_table_id    = module.private_vpc.public_route_table_id
   availability_zone = "eu-west-1a"
 }
 
 # Segunda Subnet en AZ2
 module "subnet_b" {
-  source         = "./modules/subnet"
-  vpc_id         = module.private_vpc.vpc_id
-  cidr_block     = var.subnet2_cidr_block
-  subnet_tags    = var.subnet2_tags
-  route_table_id = module.private_vpc.public_route_table_id
+  source            = "./modules/subnet"
+  vpc_id            = module.private_vpc.vpc_id
+  cidr_block        = var.subnet2_cidr_block
+  subnet_tags       = var.subnet2_tags
+  route_table_id    = module.private_vpc.public_route_table_id
   availability_zone = "eu-west-1b"
 }
 
