@@ -44,7 +44,7 @@ variable "subnet_tags" {
 variable "ec2_ami" {
   description = "AMI para la instancia EC2"
   type        = string
-  default     = "ami-0c02fb55956c7d316" # Amazon Linux 2
+  default     = "ami-00bd8e8e823b4e7f9" # Amazon Linux 3
 }
 
 variable "ec2_instance_type" {
