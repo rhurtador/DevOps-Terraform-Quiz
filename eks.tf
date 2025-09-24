@@ -63,7 +63,7 @@ resource "aws_iam_role_policy_attachment" "worker_node_AmazonEKS_CNI_Policy" {
 #   ]
 # }
 resource "aws_eks_cluster" "this" {
-  name     = "demo-eks"
+  name     = "demo-eks-test"
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
