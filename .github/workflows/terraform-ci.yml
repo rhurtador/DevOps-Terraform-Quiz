@@ -1,10 +1,73 @@
+# name: Terraform CI
+
+# on:
+#   push:
+#     branches:
+#       - main  # Default Branch
+#   workflow_dispatch:  # Permite ejecución manual
+#     inputs:
+#       environment:
+#         description: 'Environment to deploy'
+#         required: true
+#         default: 'dev'
+#         type: choice
+#         options:
+#         - dev
+#         - staging
+#         - prod
+
+# jobs:
+#   terraform:
+#     runs-on: ubuntu-latest
+#     environment: ${{ github.event.inputs.environment || 'dev' }}
+    
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: eu-west-1
+
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v3
+#         with:
+#           terraform_version: 1.6.0
+
+#       - name: Terraform Format Check
+#         run: terraform fmt -check -recursive
+
+#       - name: Terraform Init
+#         run: terraform init
+
+#       - name: Terraform Validate
+#         run: terraform validate
+
+#       - name: Terraform Plan
+#         run: terraform plan -out=tfplan
+#         continue-on-error: true
+
+#       - name: Terraform Plan Status
+#         if: always()
+#         run: |
+#           if [ $? -eq 0 ]; then
+#             echo "✅ Terraform plan completed successfully"
+#           else
+#             echo "❌ Terraform plan failed"
+#             exit 1
+#           fi
+
+
 name: Terraform CI
 
 on:
   push:
     branches:
-      - main  # Default Branch
-  workflow_dispatch:  # Permite ejecución manual
+      - main
+  workflow_dispatch:
     inputs:
       environment:
         description: 'Environment to deploy'
@@ -59,4 +122,7 @@ jobs:
             echo "❌ Terraform plan failed"
             exit 1
           fi
-           
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'   # Solo aplica en la rama main
+        run: terraform apply -auto-approve tfplan
