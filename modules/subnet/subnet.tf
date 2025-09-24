@@ -17,8 +17,7 @@ resource "aws_subnet" "main" {
 #   route_table_id = var.route_table_id
 # }
 resource "aws_route_table_association" "public_assoc" {
-  for_each       = var.route_table_id == null ? {} : { "assoc" = var.route_table_id }
   subnet_id      = aws_subnet.main.id
-  route_table_id = each.value
+  route_table_id = var.route_table_id
 }
 

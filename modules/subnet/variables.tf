@@ -25,7 +25,5 @@ variable "subnet_name" {
 #   default     = ""
 # }
 variable "route_table_id" {
-  type        = string
-  description = "Route table ID para asociar"
-  default     = null
+  type = string
 }
