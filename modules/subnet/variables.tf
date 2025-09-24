@@ -24,3 +24,8 @@ variable "route_table_id" {
   type        = string
   default     = ""
 }
+variable "route_table_id" {
+  type        = string
+  description = "Route table ID para asociar"
+  default     = null
+}
