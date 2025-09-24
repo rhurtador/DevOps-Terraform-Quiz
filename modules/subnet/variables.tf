@@ -27,3 +27,7 @@ variable "subnet_name" {
 variable "route_table_id" {
   type = string
 }
+variable "availability_zone" {
+  type    = string
+  default = null
+}

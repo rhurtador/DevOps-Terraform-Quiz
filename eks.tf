@@ -50,12 +50,27 @@ resource "aws_iam_role_policy_attachment" "worker_node_AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
 
+# resource "aws_eks_cluster" "this" {
+#   name     = "demo-eks"
+#   role_arn = aws_iam_role.eks_cluster_role.arn
+
+#   vpc_config {
+#     subnet_ids = [module.subnet.subnet_id, module.subnet_b.subnet_id]
+#   }
+
+#   depends_on = [
+#     aws_iam_role_policy_attachment.eks_cluster_AmazonEKSClusterPolicy
+#   ]
+# }
 resource "aws_eks_cluster" "this" {
   name     = "demo-eks"
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
-    subnet_ids = [module.subnet.subnet_id, module.subnet_b.subnet_id]
+    subnet_ids = [
+      module.subnet.subnet_id,
+      module.subnet_b.subnet_id
+    ]
   }
 
   depends_on = [
