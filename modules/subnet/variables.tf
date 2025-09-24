@@ -19,11 +19,11 @@ variable "subnet_name" {
   default     = "default-subnet"
 }
 
-variable "route_table_id" {
-  description = "ID de la tabla de rutas a asociar (opcional)"
-  type        = string
-  default     = ""
-}
+# variable "route_table_id" {
+#   description = "ID de la tabla de rutas a asociar (opcional)"
+#   type        = string
+#   default     = ""
+# }
 variable "route_table_id" {
   type        = string
   description = "Route table ID para asociar"
