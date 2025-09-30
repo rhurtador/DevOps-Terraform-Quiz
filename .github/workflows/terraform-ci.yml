@@ -113,13 +113,15 @@ jobs:
         run: |
           set -euo pipefail
           echo "Checking for backend or local state..."
-          if find . -type f -name "*.tf" -print0 | xargs -0 grep -nE 'backend "(s3|azurerm|gcs|http)"' -q; then
-            echo "Remote backend detected. Skipping local terraform.tfstate check."
+          # Detect any backend block (s3, azurerm, gcs, http, remote, etc.) recursively in repo
+          if find . -type f -name "*.tf" -print0 | xargs -0 grep -nE 'backend\s+"[^"]+"' -q; then
+            echo "Backend configured in repository. Skipping local terraform.tfstate check."
           else
             if [ -f terraform.tfstate ]; then
               echo "Found terraform.tfstate in repo."
             else
-              echo "terraform.tfstate not found and no remote backend configured." >&2
+              echo "terraform.tfstate not found and no backend block configured anywhere in the repo." >&2
+              echo "If you use a remote backend (e.g., Terraform Cloud), add a backend block in root or skip this check." >&2
               exit 1
             fi
           fi
