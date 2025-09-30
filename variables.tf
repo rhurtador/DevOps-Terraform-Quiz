@@ -153,3 +153,15 @@ variable "security_group_vpc_id" {
   default     = ""
 }
 
+variable "ec2_security_group_name" {
+  description = "Nombre del SG para EC2"
+  type        = string
+  default     = "ec2-sg"
+}
+
+variable "ec2_security_group_description" {
+  description = "Descripción del SG para EC2"
+  type        = string
+  default     = "Security group para instancia EC2"
+}
+
