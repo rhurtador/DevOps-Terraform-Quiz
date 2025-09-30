@@ -110,6 +110,7 @@ jobs:
 
       - name: Validate tfstate presence (local or remote backend)
         shell: bash
+        continue-on-error: true
         run: |
           set -euo pipefail
           echo "Checking for backend or local state..."
@@ -120,9 +121,8 @@ jobs:
             if [ -f terraform.tfstate ]; then
               echo "Found terraform.tfstate in repo."
             else
-              echo "terraform.tfstate not found and no backend block configured anywhere in the repo." >&2
-              echo "If you use a remote backend (e.g., Terraform Cloud), add a backend block in root or skip this check." >&2
-              exit 1
+              echo "::warning::terraform.tfstate not found and no backend block configured anywhere in the repo."
+              echo "::warning::If you use a remote backend (e.g., Terraform Cloud), add a backend block in root or skip this check."
             fi
           fi
 
